@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "db:generate": "drizzle-kit generate --config drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config drizzle.config.ts"
   },
   "dependencies": {
     "@listee/api": "link:@listee/api",
@@ -19,10 +21,13 @@
     "next": "15.5.4"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@biomejs/biome": "2.2.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@biomejs/biome": "2.2.0"
+    "drizzle-kit": "^0.31.0",
+    "drizzle-orm": "^0.44.5",
+    "postgres": "^3.4.7",
+    "typescript": "^5"
   }
 }
