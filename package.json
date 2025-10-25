@@ -18,7 +18,8 @@
     "@listee/types": "link:@listee/types",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "next": "15.5.4"
+    "next": "15.5.4",
+    "drizzle-orm": "0.44.5"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
@@ -26,8 +27,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "drizzle-kit": "^0.31.0",
-    "drizzle-orm": "^0.44.5",
-    "postgres": "^3.4.7",
     "typescript": "^5"
   }
 }
