@@ -15,6 +15,13 @@
       "when": 1761291384567,
       "tag": "0001_lying_firebrand",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1761459076331,
+      "tag": "0002_gigantic_starbolt",
+      "breakpoints": true
     }
   ]
 }
