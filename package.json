@@ -12,10 +12,10 @@
     "db:migrate": "drizzle-kit migrate --config drizzle.config.ts"
   },
   "dependencies": {
-    "@listee/api": "link:@listee/api",
-    "@listee/auth": "link:@listee/auth",
-    "@listee/db": "link:@listee/db",
-    "@listee/types": "link:@listee/types",
+    "@listee/api": "0.2.3",
+    "@listee/auth": "0.2.3",
+    "@listee/db": "0.2.3",
+    "@listee/types": "0.2.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "next": "15.5.4",
