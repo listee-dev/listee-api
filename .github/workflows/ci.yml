@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - "**"
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  lint:
+    uses: listee-dev/listee-ci/.github/workflows/lint.yml@main
+
+  typecheck:
+    uses: listee-dev/listee-ci/.github/workflows/typecheck.yml@main

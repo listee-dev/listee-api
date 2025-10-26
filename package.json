@@ -1,0 +1,32 @@
+{
+  "name": "listee-api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "biome check",
+    "format": "biome format --write",
+    "db:generate": "drizzle-kit generate --config drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config drizzle.config.ts"
+  },
+  "dependencies": {
+    "@listee/api": "0.2.3",
+    "@listee/auth": "0.2.3",
+    "@listee/db": "0.2.3",
+    "@listee/types": "0.2.3",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "next": "15.5.4",
+    "drizzle-orm": "0.44.5"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.0",
+    "typescript": "^5"
+  }
+}
