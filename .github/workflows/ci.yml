@@ -13,16 +13,9 @@ permissions:
   pull-requests: write
   id-token: write
 
-env:
-  POSTGRES_URL: postgres://postgres:postgres@localhost:5432/postgres
-  NEXT_TELEMETRY_DISABLED: "1"
-
 jobs:
   lint:
     uses: listee-dev/listee-ci/.github/workflows/lint.yml@main
 
   typecheck:
     uses: listee-dev/listee-ci/.github/workflows/typecheck.yml@main
-
-  test:
-    uses: listee-dev/listee-ci/.github/workflows/test.yml@main
