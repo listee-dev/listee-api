@@ -4,10 +4,10 @@
     "": {
       "name": "listee-api",
       "dependencies": {
-        "@listee/api": "0.2.3",
-        "@listee/auth": "0.2.3",
-        "@listee/db": "0.2.3",
-        "@listee/types": "0.2.3",
+        "@listee/api": "0.3.0",
+        "@listee/auth": "0.3.0",
+        "@listee/db": "0.3.0",
+        "@listee/types": "0.3.0",
         "drizzle-orm": "0.44.5",
         "next": "15.5.4",
         "react": "19.1.0",
@@ -148,13 +148,13 @@
 
     "@img/sharp-win32-x64": ["@img/sharp-win32-x64@0.34.4", "", { "os": "win32", "cpu": "x64" }, "sha512-xIyj4wpYs8J18sVN3mSQjwrw7fKUqRw+Z5rnHNCy5fYTxigBz81u5mOMPmFumwjcn8+ld1ppptMBCLic1nz6ig=="],
 
-    "@listee/api": ["@listee/api@0.2.3", "", { "dependencies": { "@listee/auth": "^0.2.3", "@listee/db": "^0.2.3", "@listee/types": "^0.2.3", "hono": "^4.4.4" } }, "sha512-OEHmKEBh0CG0NvaoWAHEuQMDWbRY0S0LCh8i6a2gxszS9O1DQKvnTOnIAwk2GTJ2E30bfwZKZVeIsKGCu94oew=="],
+    "@listee/api": ["@listee/api@0.3.0", "", { "dependencies": { "@listee/auth": "^0.3.0", "@listee/db": "^0.3.0", "@listee/types": "^0.3.0", "hono": "^4.4.4" } }, "sha512-QYhNnoyq0qiS3wLhiL3e5Rh778Pvuck53BA1bm/HN5MMilubG2XnRu4ddBWXGGC6XMLOnWuHW6KHudo+Qq4hkg=="],
 
-    "@listee/auth": ["@listee/auth@0.2.3", "", { "dependencies": { "@listee/db": "^0.2.3", "@listee/types": "^0.2.3", "jose": "^5.2.3" } }, "sha512-uKWmlxL1wji+/qILopv1iOc8G98fpBhmpTTAc7CgtaNK3bXdrbsKSQCNKUXxu9Q5bPsdWNcbLP1AyYznwEE9wQ=="],
+    "@listee/auth": ["@listee/auth@0.3.0", "", { "dependencies": { "@listee/db": "^0.3.0", "@listee/types": "^0.3.0", "jose": "^5.2.3" } }, "sha512-esTAtrv+SR0gtHg/HPCyZvG2NG+bY//h3U6tZuy4SuVsN/sZ0060c47GwVdV7Ety4j3no3HZDnGTAPpN1xir7A=="],
 
-    "@listee/db": ["@listee/db@0.2.3", "", { "dependencies": { "drizzle-orm": "^0.44.5", "postgres": "^3.4.7" } }, "sha512-RNijZvSbavrMITk+mKUwPon2XwcbxVYiQSLWPfrv83g+B3JpG1ClYId4qk21cJkUVH6Hn6O97rXN1XOQSKdKNw=="],
+    "@listee/db": ["@listee/db@0.3.0", "", { "dependencies": { "drizzle-orm": "^0.44.5", "postgres": "^3.4.7" } }, "sha512-lokU4wQCp0Wr73U4qSe7Y5Zn6H8EdIvnKSUcvT5nXXcJSdqtwvk0KGpWk7HZUIoV8I6StAiMD/wUjckIqTFnwg=="],
 
-    "@listee/types": ["@listee/types@0.2.3", "", { "dependencies": { "@listee/db": "^0.2.3" } }, "sha512-eGOVIn4nCTIWuIC8fu07vjbBf14UU8DQKJQCQOpJjFjW7YP4hCUdjc64DhtYjlsK56xi/TiJprVw7MrpJfx4FA=="],
+    "@listee/types": ["@listee/types@0.3.0", "", { "dependencies": { "@listee/db": "^0.3.0" } }, "sha512-yfHI2ShIARi/TqTUC2/Sn41LhJMv4Stc7IrX0CeyiGisHfS7E4mg7NhLRKuQi77F6zzqhXkpORH2dQ21V7TDCQ=="],
 
     "@next/env": ["@next/env@15.5.4", "", {}, "sha512-27SQhYp5QryzIT5uO8hq99C69eLQ7qkzkDPsk3N+GuS2XgOgoYEeOav7Pf8Tn4drECOVDsDg8oj+/DVy8qQL2A=="],
 
