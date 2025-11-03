@@ -16,8 +16,12 @@ listee-api exposes Listee's HTTP interface. It packages `@listee/api` inside a N
 ## Environment Variables
 Configure these values in `.env.local` for development and in production:
 - `POSTGRES_URL` – Supabase Postgres connection string.
-- `SUPABASE_URL` and `SUPABASE_ANON_KEY` – required by auth integrations.
-- `LISTEE_API_AUTH_BEARER_MODE` – optional; `user-id` (default) or `access-token` to define how bearer headers are interpreted.
+- `SUPABASE_URL` – Supabase project base URL (e.g. `https://your-project.supabase.co`).
+- `SUPABASE_JWT_AUDIENCE` – optional; comma-separated audience values to enforce.
+- `SUPABASE_JWT_REQUIRED_ROLE` – optional; enforce a specific `role` claim (e.g. `authenticated`).
+- `SUPABASE_JWT_ISSUER` – optional; override the expected issuer. Defaults to `${SUPABASE_URL}/auth/v1`.
+- `SUPABASE_JWKS_PATH` – optional; override the JWKS endpoint path. Defaults to `/auth/v1/.well-known/jwks.json`.
+- `SUPABASE_JWT_CLOCK_TOLERANCE_SECONDS` – optional; non-negative integer clock skew tolerance.
 
 ## Response Contract
 - Success responses always return JSON with a top-level `data` property. DELETE operations respond with `{ "data": null }`.
@@ -38,7 +42,7 @@ Configure these values in `.env.local` for development and in production:
 | DELETE | `/api/tasks/:taskId` | Delete a task owned by the user |
 | GET | `/api/healthz` | Database connectivity probe |
 
-All endpoints expect `Authorization: Bearer <token>`. When `LISTEE_API_AUTH_BEARER_MODE=user-id`, the token must be the Supabase user ID.
+All endpoints expect `Authorization: Bearer <token>` where `<token>` is a Supabase JWT access token issued for the authenticated user.
 
 ## Local Development
 1. Install dependencies: `bun install`.

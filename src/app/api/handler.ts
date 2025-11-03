@@ -8,10 +8,116 @@ import {
   createTaskRepository,
   createTaskService,
 } from "@listee/api";
-import { createHeaderAuthentication } from "@listee/auth";
+import type { AuthenticationProvider } from "@listee/auth";
+import { createSupabaseAuthentication } from "@listee/auth";
 import { getDb } from "@listee/db";
 
 const API_PREFIX = "/api";
+
+const readRequiredEnv = (key: string): string => {
+  const value = process.env[key];
+  if (value === undefined) {
+    throw new Error(`${key} is not set. Configure it before starting the API.`);
+  }
+
+  const trimmed = value.trim();
+  if (trimmed.length === 0) {
+    throw new Error(
+      `${key} is empty. Provide a non-empty value before starting the API.`,
+    );
+  }
+
+  return trimmed;
+};
+
+const readOptionalEnv = (key: string): string | undefined => {
+  const value = process.env[key];
+  if (value === undefined) {
+    return undefined;
+  }
+
+  const trimmed = value.trim();
+  if (trimmed.length === 0) {
+    return undefined;
+  }
+
+  return trimmed;
+};
+
+const parseAudience = (
+  value: string | undefined,
+): string | string[] | undefined => {
+  if (value === undefined) {
+    return undefined;
+  }
+
+  if (!value.includes(",")) {
+    return value;
+  }
+
+  const parts = value
+    .split(",")
+    .map((part) => part.trim())
+    .filter((part) => part.length > 0);
+
+  if (parts.length === 0) {
+    throw new Error(
+      "SUPABASE_JWT_AUDIENCE must include at least one non-empty value.",
+    );
+  }
+
+  return parts;
+};
+
+const parseClockTolerance = (value: string | undefined): number | undefined => {
+  if (value === undefined) {
+    return undefined;
+  }
+
+  const parsed = Number.parseInt(value, 10);
+  if (!Number.isFinite(parsed) || parsed < 0) {
+    throw new Error(
+      "SUPABASE_JWT_CLOCK_TOLERANCE_SECONDS must be a non-negative integer.",
+    );
+  }
+
+  return parsed;
+};
+
+let cachedAuthentication: AuthenticationProvider | null = null;
+
+const getAuthentication = (): AuthenticationProvider => {
+  if (cachedAuthentication !== null) {
+    return cachedAuthentication;
+  }
+
+  const projectUrl = readRequiredEnv("SUPABASE_URL");
+  const audience = parseAudience(readOptionalEnv("SUPABASE_JWT_AUDIENCE"));
+  const issuer = readOptionalEnv("SUPABASE_JWT_ISSUER");
+  const requiredRole = readOptionalEnv("SUPABASE_JWT_REQUIRED_ROLE");
+  const clockTolerance = parseClockTolerance(
+    readOptionalEnv("SUPABASE_JWT_CLOCK_TOLERANCE_SECONDS"),
+  );
+  const jwksPath = readOptionalEnv("SUPABASE_JWKS_PATH");
+
+  cachedAuthentication = createSupabaseAuthentication({
+    projectUrl,
+    audience,
+    issuer,
+    requiredRole,
+    clockToleranceSeconds: clockTolerance,
+    jwksPath,
+  });
+
+  return cachedAuthentication;
+};
+
+const authentication: AuthenticationProvider = {
+  authenticate: async (context) => {
+    const provider = getAuthentication();
+    return await provider.authenticate(context);
+  },
+};
 
 const stripApiPrefix = (pathname: string): string => {
   if (!pathname.startsWith(API_PREFIX)) {
@@ -38,7 +144,6 @@ const taskService = createTaskService({
 });
 const categoryQueries = createCategoryQueries({ service: categoryService });
 const taskQueries = createTaskQueries({ service: taskService });
-const authentication = createHeaderAuthentication();
 
 const honoFetchHandler = createFetchHandler({
   databaseHealth,
@@ -50,10 +155,24 @@ const honoFetchHandler = createFetchHandler({
 export const dispatchToListeeApi = async (
   request: Request,
 ): Promise<Response> => {
-  const originalUrl = new URL(request.url);
-  const targetUrl = new URL(request.url);
-  targetUrl.pathname = stripApiPrefix(originalUrl.pathname);
+  try {
+    const originalUrl = new URL(request.url);
+    const targetUrl = new URL(request.url);
+    targetUrl.pathname = stripApiPrefix(originalUrl.pathname);
 
-  const honoRequest = new Request(targetUrl, request);
-  return await honoFetchHandler(honoRequest);
+    const honoRequest = new Request(targetUrl, request);
+    return await honoFetchHandler(honoRequest);
+  } catch (error) {
+    const message =
+      error instanceof Error
+        ? error.message
+        : "An unexpected error occurred while handling the request.";
+    console.error("Unhandled Listee API error:", error);
+    return Response.json(
+      {
+        error: message,
+      },
+      { status: 500 },
+    );
+  }
 };
