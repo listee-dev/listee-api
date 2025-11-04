@@ -16,10 +16,12 @@
     "@listee/auth": "0.4.0",
     "@listee/db": "0.4.0",
     "@listee/types": "0.4.0",
+    "@t3-oss/env-nextjs": "^0.13.8",
+    "drizzle-orm": "0.44.5",
+    "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "next": "15.5.4",
-    "drizzle-orm": "0.44.5"
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
@@ -27,6 +29,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "drizzle-kit": "^0.31.0",
+    "jiti": "^2.6.1",
     "typescript": "^5"
   }
 }

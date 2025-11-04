@@ -17,7 +17,7 @@ listee-api exposes Listee's HTTP interface. It packages `@listee/api` inside a N
 Configure these values in `.env.local` for development and in production:
 - `POSTGRES_URL` – Supabase Postgres connection string.
 - `SUPABASE_URL` – Supabase project base URL (e.g. `https://your-project.supabase.co`).
-- `SUPABASE_JWT_AUDIENCE` – optional; comma-separated audience values to enforce.
+- `SUPABASE_JWT_AUDIENCE` – optional; audience value to enforce.
 - `SUPABASE_JWT_REQUIRED_ROLE` – optional; enforce a specific `role` claim (e.g. `authenticated`).
 - `SUPABASE_JWT_ISSUER` – optional; override the expected issuer. Defaults to `${SUPABASE_URL}/auth/v1`.
 - `SUPABASE_JWKS_PATH` – optional; override the JWKS endpoint path. Defaults to `/auth/v1/.well-known/jwks.json`.
