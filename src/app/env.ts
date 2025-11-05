@@ -2,19 +2,20 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
 const urlString = z.url();
-const optionalNonEmptyString = z
+const nonEmptyString = z
   .string()
   .min(1)
   .refine((value) => value === value.trim(), {
     message: "Value must not include leading or trailing whitespace.",
-  })
-  .optional();
+  });
+const optionalNonEmptyString = nonEmptyString.optional();
 
 const buildEnv = () => {
   return createEnv({
     server: {
       POSTGRES_URL: urlString,
       SUPABASE_URL: urlString,
+      SUPABASE_PUBLISHABLE_KEY: nonEmptyString,
       SUPABASE_JWT_AUDIENCE: optionalNonEmptyString,
       SUPABASE_JWT_REQUIRED_ROLE: optionalNonEmptyString,
       SUPABASE_JWT_ISSUER: urlString.optional(),

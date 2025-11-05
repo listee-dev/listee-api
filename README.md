@@ -17,6 +17,7 @@ listee-api exposes Listee's HTTP interface. It packages `@listee/api` inside a N
 Configure these values in `.env.local` for development and in production:
 - `POSTGRES_URL` – Supabase Postgres connection string.
 - `SUPABASE_URL` – Supabase project base URL (e.g. `https://your-project.supabase.co`).
+- `SUPABASE_PUBLISHABLE_KEY` – Supabase publishable (anon) key used to call Auth endpoints.
 - `SUPABASE_JWT_AUDIENCE` – optional; audience value to enforce.
 - `SUPABASE_JWT_REQUIRED_ROLE` – optional; enforce a specific `role` claim (e.g. `authenticated`).
 - `SUPABASE_JWT_ISSUER` – optional; override the expected issuer. Defaults to `${SUPABASE_URL}/auth/v1`.
@@ -30,6 +31,9 @@ Configure these values in `.env.local` for development and in production:
 ## API Surface
 | Method | Path | Description |
 | ------ | ---- | ----------- |
+| POST | `/api/auth/signup` | Forward email/password signups to Supabase Auth |
+| POST | `/api/auth/login` | Exchange email/password for Supabase access + refresh tokens |
+| POST | `/api/auth/token` | Refresh Supabase access tokens using a stored refresh token |
 | GET | `/api/users/:userId/categories` | List categories for the authenticated user |
 | POST | `/api/users/:userId/categories` | Create a new category |
 | GET | `/api/categories/:categoryId` | Fetch category details |
