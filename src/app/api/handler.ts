@@ -8,16 +8,19 @@ import {
   createTaskRepository,
   createTaskService,
 } from "@listee/api";
-import type { AuthenticationProvider } from "@listee/auth";
 import { createSupabaseAuthentication } from "@listee/auth";
 import { getDb } from "@listee/db";
 import { getEnv } from "../env";
 
 const API_PREFIX = "/api";
 
-let cachedAuthentication: AuthenticationProvider | null = null;
+let cachedAuthentication: ReturnType<
+  typeof createSupabaseAuthentication
+> | null = null;
 
-const getAuthentication = (): AuthenticationProvider => {
+const getAuthentication = (): ReturnType<
+  typeof createSupabaseAuthentication
+> => {
   if (cachedAuthentication !== null) {
     return cachedAuthentication;
   }
@@ -40,13 +43,6 @@ const getAuthentication = (): AuthenticationProvider => {
   });
 
   return cachedAuthentication;
-};
-
-const authentication: AuthenticationProvider = {
-  authenticate: async (context) => {
-    const provider = getAuthentication();
-    return await provider.authenticate(context);
-  },
 };
 
 const stripApiPrefix = (pathname: string): string => {
@@ -79,7 +75,12 @@ const honoFetchHandler = createFetchHandler({
   databaseHealth,
   categoryQueries,
   taskQueries,
-  authentication,
+  authentication: {
+    authenticate: async (context) => {
+      const provider = getAuthentication();
+      return await provider.authenticate(context);
+    },
+  },
 });
 
 export const dispatchToListeeApi = async (

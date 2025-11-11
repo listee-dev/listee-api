@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { SupabaseAuthError } from "@listee/auth";
 
 import {
   ApiError,
@@ -6,26 +6,18 @@ import {
   parseJsonBody,
   respondWithData,
 } from "@/app/api/auth/utils";
-import { SupabaseRequestError, supabaseLogin } from "@/services/supabase-auth";
-
-const loginSchema = z.object({
-  email: z.string().trim().email("Email must be a valid email address."),
-  password: z
-    .string()
-    .min(1, "Password must not be empty.")
-    .refine((value) => value === value.trim(), {
-      message: "Password must not include leading or trailing whitespace.",
-    }),
-});
+import { loginSchema } from "@/app/api/auth/validation";
+import { getSupabaseAuthClient } from "@/app/supabase-auth-client";
 
 export async function POST(request: Request): Promise<Response> {
   return handleRoute(async () => {
     const input = await parseJsonBody(request, loginSchema);
     try {
-      const tokenResponse = await supabaseLogin(input);
+      const authClient = getSupabaseAuthClient();
+      const tokenResponse = await authClient.login(input);
       return respondWithData(tokenResponse, 200);
     } catch (error) {
-      if (error instanceof SupabaseRequestError) {
+      if (error instanceof SupabaseAuthError) {
         throw new ApiError(error.statusCode, error.message);
       }
       throw error;

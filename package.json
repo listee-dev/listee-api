@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "@listee/api": "0.3.1",
-    "@listee/auth": "0.4.0",
+    "@listee/auth": "file:../listee-libs/packages/auth/dist",
     "@listee/db": "0.4.0",
-    "@listee/types": "0.4.0",
+    "@listee/types": "file:../listee-libs/packages/types/dist",
     "@t3-oss/env-nextjs": "0.13.8",
     "drizzle-orm": "0.44.5",
     "next": "15.5.4",
