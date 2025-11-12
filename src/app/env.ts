@@ -30,7 +30,7 @@ const buildEnv = () => {
         .optional(),
     },
     client: {},
-    experimental__runtimeEnv: {},
+    experimental__runtimeEnv: process.env,
     emptyStringAsUndefined: true,
   });
 };
