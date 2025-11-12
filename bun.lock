@@ -4,12 +4,12 @@
     "": {
       "name": "listee-api",
       "dependencies": {
-        "@listee/api": "0.3.1",
-        "@listee/auth": "file:../listee-libs/packages/auth/dist",
+        "@listee/api": "0.3.2",
+        "@listee/auth": "0.5.0",
         "@listee/db": "0.4.0",
+        "@listee/types": "0.5.0",
         "@t3-oss/env-nextjs": "0.13.8",
         "drizzle-orm": "0.44.5",
-        "@listee/types": "file:../listee-libs/packages/types/dist",
         "next": "15.5.4",
         "react": "19.1.0",
         "react-dom": "19.1.0",
@@ -151,13 +151,13 @@
 
     "@img/sharp-win32-x64": ["@img/sharp-win32-x64@0.34.4", "", { "os": "win32", "cpu": "x64" }, "sha512-xIyj4wpYs8J18sVN3mSQjwrw7fKUqRw+Z5rnHNCy5fYTxigBz81u5mOMPmFumwjcn8+ld1ppptMBCLic1nz6ig=="],
 
-    "@listee/api": ["@listee/api@0.3.1", "", { "dependencies": { "@listee/auth": "^0.4.0", "@listee/db": "^0.4.0", "@listee/types": "^0.4.0", "hono": "^4.4.4" } }, "sha512-pHHxky+DgSROgx9r67eADtHPZu9ofRNx0vV6DlgFSJjmGymRiW04b7q5TrVoa0bpDfHvGdIEi9brQjQdlcyISQ=="],
+    "@listee/api": ["@listee/api@0.3.2", "", { "dependencies": { "@listee/auth": "^0.5.0", "@listee/db": "^0.4.0", "@listee/types": "^0.5.0", "hono": "^4.4.4" } }, "sha512-BjXE7lGe64Eksqz/6xrwxncd3uY3hjKTR5z2MD95ZUMLScADPr0bZbbdhfnTHIHwAwj1NvM0fPRawmwq3biFDA=="],
 
-    "@listee/auth": ["@listee/auth@file:../listee-libs/packages/auth/dist", { "dependencies": { "@listee/db": "^0.4.0", "@listee/types": "^0.4.0", "jose": "^5.2.3" } }],
+    "@listee/auth": ["@listee/auth@0.5.0", "", { "dependencies": { "@listee/db": "^0.4.0", "@listee/types": "^0.5.0", "jose": "^5.2.3" } }, "sha512-MzRBBmo9FlEjS0l/QlSZot+mz7zchjqPQqqtMq8H/uADvNacSysNpkVmvjvV5YFBCifR6IJ1ocWdifIcOaE4Mw=="],
 
     "@listee/db": ["@listee/db@0.4.0", "", { "dependencies": { "drizzle-orm": "^0.44.5", "postgres": "^3.4.7" } }, "sha512-6WOSt6UZy+fX2TnsrLl812P9NdWPocCGrOzN6kVnfdR61rbh2OE8k6KPC3cXnGzbamIQBueeut8v66ho0lHsiw=="],
 
-    "@listee/types": ["@listee/types@file:../listee-libs/packages/types/dist", { "dependencies": { "@listee/db": "^0.4.0" } }],
+    "@listee/types": ["@listee/types@0.5.0", "", { "dependencies": { "@listee/db": "^0.4.0" } }, "sha512-jRBGTrsmuezx6x7g9XD4XWrooHL7sAqST3dNzTmoiFgv3wqsnwF/uSqay9ln0f8woCjwULJfifm9ko7gHI0DKg=="],
 
     "@next/env": ["@next/env@15.5.4", "", {}, "sha512-27SQhYp5QryzIT5uO8hq99C69eLQ7qkzkDPsk3N+GuS2XgOgoYEeOav7Pf8Tn4drECOVDsDg8oj+/DVy8qQL2A=="],
 
@@ -258,12 +258,6 @@
     "zod": ["zod@4.1.12", "", {}, "sha512-JInaHOamG8pt5+Ey8kGmdcAcg3OL9reK8ltczgHTAwNhMys/6ThXHityHxVV2p3fkw/c+MAvBHFVYHFZDmjMCQ=="],
 
     "@esbuild-kit/core-utils/esbuild": ["esbuild@0.18.20", "", { "optionalDependencies": { "@esbuild/android-arm": "0.18.20", "@esbuild/android-arm64": "0.18.20", "@esbuild/android-x64": "0.18.20", "@esbuild/darwin-arm64": "0.18.20", "@esbuild/darwin-x64": "0.18.20", "@esbuild/freebsd-arm64": "0.18.20", "@esbuild/freebsd-x64": "0.18.20", "@esbuild/linux-arm": "0.18.20", "@esbuild/linux-arm64": "0.18.20", "@esbuild/linux-ia32": "0.18.20", "@esbuild/linux-loong64": "0.18.20", "@esbuild/linux-mips64el": "0.18.20", "@esbuild/linux-ppc64": "0.18.20", "@esbuild/linux-riscv64": "0.18.20", "@esbuild/linux-s390x": "0.18.20", "@esbuild/linux-x64": "0.18.20", "@esbuild/netbsd-x64": "0.18.20", "@esbuild/openbsd-x64": "0.18.20", "@esbuild/sunos-x64": "0.18.20", "@esbuild/win32-arm64": "0.18.20", "@esbuild/win32-ia32": "0.18.20", "@esbuild/win32-x64": "0.18.20" }, "bin": { "esbuild": "bin/esbuild" } }, "sha512-ceqxoedUrcayh7Y7ZX6NdbbDzGROiyVBgC4PriJThBKSVPWnnFHZAkfI1lJT8QFkOwH4qOS2SJkS4wvpGl8BpA=="],
-
-    "@listee/api/@listee/auth": ["@listee/auth@0.4.0", "", { "dependencies": { "@listee/db": "^0.4.0", "@listee/types": "^0.4.0", "jose": "^5.2.3" } }, "sha512-Er3L7k1br6b/3ROLVrnI4xUzGeJMtpQdy2py9qd7d7S8SpBcZwUa1mejwfjACwrk2t/WyUNnhHF/Kgsk137q3Q=="],
-
-    "@listee/api/@listee/types": ["@listee/types@0.4.0", "", { "dependencies": { "@listee/db": "^0.4.0" } }, "sha512-UmQjgCGu23ebgHoP3zYknEDirASRADguKJleEsrU/XwBSfxb7xSyAmIz7Erf1vSjYY+qj35LnoydOk4mSdYHNQ=="],
-
-    "@listee/auth/@listee/types": ["@listee/types@0.4.0", "", { "dependencies": { "@listee/db": "^0.4.0" } }, "sha512-UmQjgCGu23ebgHoP3zYknEDirASRADguKJleEsrU/XwBSfxb7xSyAmIz7Erf1vSjYY+qj35LnoydOk4mSdYHNQ=="],
 
     "@esbuild-kit/core-utils/esbuild/@esbuild/android-arm": ["@esbuild/android-arm@0.18.20", "", { "os": "android", "cpu": "arm" }, "sha512-fyi7TDI/ijKKNZTUJAQqiG5T7YjJXgnzkURqmGj13C6dCqckZBLdl4h7bkhHt/t0WP+zO9/zwroDvANaOqO5Sw=="],
 
