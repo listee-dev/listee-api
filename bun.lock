@@ -4,14 +4,16 @@
     "": {
       "name": "listee-api",
       "dependencies": {
-        "@listee/api": "0.2.3",
-        "@listee/auth": "0.2.3",
-        "@listee/db": "0.2.3",
-        "@listee/types": "0.2.3",
+        "@listee/api": "0.3.2",
+        "@listee/auth": "0.5.0",
+        "@listee/db": "0.4.0",
+        "@listee/types": "0.5.0",
+        "@t3-oss/env-nextjs": "0.13.8",
         "drizzle-orm": "0.44.5",
         "next": "15.5.4",
         "react": "19.1.0",
         "react-dom": "19.1.0",
+        "zod": "4.1.12",
       },
       "devDependencies": {
         "@biomejs/biome": "2.2.0",
@@ -19,6 +21,7 @@
         "@types/react": "^19",
         "@types/react-dom": "^19",
         "drizzle-kit": "^0.31.0",
+        "jiti": "^2.6.1",
         "typescript": "^5",
       },
     },
@@ -148,13 +151,13 @@
 
     "@img/sharp-win32-x64": ["@img/sharp-win32-x64@0.34.4", "", { "os": "win32", "cpu": "x64" }, "sha512-xIyj4wpYs8J18sVN3mSQjwrw7fKUqRw+Z5rnHNCy5fYTxigBz81u5mOMPmFumwjcn8+ld1ppptMBCLic1nz6ig=="],
 
-    "@listee/api": ["@listee/api@0.2.3", "", { "dependencies": { "@listee/auth": "^0.2.3", "@listee/db": "^0.2.3", "@listee/types": "^0.2.3", "hono": "^4.4.4" } }, "sha512-OEHmKEBh0CG0NvaoWAHEuQMDWbRY0S0LCh8i6a2gxszS9O1DQKvnTOnIAwk2GTJ2E30bfwZKZVeIsKGCu94oew=="],
+    "@listee/api": ["@listee/api@0.3.2", "", { "dependencies": { "@listee/auth": "^0.5.0", "@listee/db": "^0.4.0", "@listee/types": "^0.5.0", "hono": "^4.4.4" } }, "sha512-BjXE7lGe64Eksqz/6xrwxncd3uY3hjKTR5z2MD95ZUMLScADPr0bZbbdhfnTHIHwAwj1NvM0fPRawmwq3biFDA=="],
 
-    "@listee/auth": ["@listee/auth@0.2.3", "", { "dependencies": { "@listee/db": "^0.2.3", "@listee/types": "^0.2.3", "jose": "^5.2.3" } }, "sha512-uKWmlxL1wji+/qILopv1iOc8G98fpBhmpTTAc7CgtaNK3bXdrbsKSQCNKUXxu9Q5bPsdWNcbLP1AyYznwEE9wQ=="],
+    "@listee/auth": ["@listee/auth@0.5.0", "", { "dependencies": { "@listee/db": "^0.4.0", "@listee/types": "^0.5.0", "jose": "^5.2.3" } }, "sha512-MzRBBmo9FlEjS0l/QlSZot+mz7zchjqPQqqtMq8H/uADvNacSysNpkVmvjvV5YFBCifR6IJ1ocWdifIcOaE4Mw=="],
 
-    "@listee/db": ["@listee/db@0.2.3", "", { "dependencies": { "drizzle-orm": "^0.44.5", "postgres": "^3.4.7" } }, "sha512-RNijZvSbavrMITk+mKUwPon2XwcbxVYiQSLWPfrv83g+B3JpG1ClYId4qk21cJkUVH6Hn6O97rXN1XOQSKdKNw=="],
+    "@listee/db": ["@listee/db@0.4.0", "", { "dependencies": { "drizzle-orm": "^0.44.5", "postgres": "^3.4.7" } }, "sha512-6WOSt6UZy+fX2TnsrLl812P9NdWPocCGrOzN6kVnfdR61rbh2OE8k6KPC3cXnGzbamIQBueeut8v66ho0lHsiw=="],
 
-    "@listee/types": ["@listee/types@0.2.3", "", { "dependencies": { "@listee/db": "^0.2.3" } }, "sha512-eGOVIn4nCTIWuIC8fu07vjbBf14UU8DQKJQCQOpJjFjW7YP4hCUdjc64DhtYjlsK56xi/TiJprVw7MrpJfx4FA=="],
+    "@listee/types": ["@listee/types@0.5.0", "", { "dependencies": { "@listee/db": "^0.4.0" } }, "sha512-jRBGTrsmuezx6x7g9XD4XWrooHL7sAqST3dNzTmoiFgv3wqsnwF/uSqay9ln0f8woCjwULJfifm9ko7gHI0DKg=="],
 
     "@next/env": ["@next/env@15.5.4", "", {}, "sha512-27SQhYp5QryzIT5uO8hq99C69eLQ7qkzkDPsk3N+GuS2XgOgoYEeOav7Pf8Tn4drECOVDsDg8oj+/DVy8qQL2A=="],
 
@@ -175,6 +178,10 @@
     "@next/swc-win32-x64-msvc": ["@next/swc-win32-x64-msvc@15.5.4", "", { "os": "win32", "cpu": "x64" }, "sha512-1ur2tSHZj8Px/KMAthmuI9FMp/YFusMMGoRNJaRZMOlSkgvLjzosSdQI0cJAKogdHl3qXUQKL9MGaYvKwA7DXg=="],
 
     "@swc/helpers": ["@swc/helpers@0.5.15", "", { "dependencies": { "tslib": "^2.8.0" } }, "sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g=="],
+
+    "@t3-oss/env-core": ["@t3-oss/env-core@0.13.8", "", { "peerDependencies": { "arktype": "^2.1.0", "typescript": ">=5.0.0", "valibot": "^1.0.0-beta.7 || ^1.0.0", "zod": "^3.24.0 || ^4.0.0-beta.0" }, "optionalPeers": ["arktype", "typescript", "valibot", "zod"] }, "sha512-L1inmpzLQyYu4+Q1DyrXsGJYCXbtXjC4cICw1uAKv0ppYPQv656lhZPU91Qd1VS6SO/bou1/q5ufVzBGbNsUpw=="],
+
+    "@t3-oss/env-nextjs": ["@t3-oss/env-nextjs@0.13.8", "", { "dependencies": { "@t3-oss/env-core": "0.13.8" }, "peerDependencies": { "arktype": "^2.1.0", "typescript": ">=5.0.0", "valibot": "^1.0.0-beta.7 || ^1.0.0", "zod": "^3.24.0 || ^4.0.0-beta.0" }, "optionalPeers": ["arktype", "typescript", "valibot", "zod"] }, "sha512-QmTLnsdQJ8BiQad2W2nvV6oUpH4oMZMqnFEjhVpzU0h3sI9hn8zb8crjWJ1Amq453mGZs6A4v4ihIeBFDOrLeQ=="],
 
     "@types/node": ["@types/node@20.19.21", "", { "dependencies": { "undici-types": "~6.21.0" } }, "sha512-CsGG2P3I5y48RPMfprQGfy4JPRZ6csfC3ltBZSRItG3ngggmNY/qs2uZKp4p9VbrpqNNSMzUZNFZKzgOGnd/VA=="],
 
@@ -205,6 +212,8 @@
     "get-tsconfig": ["get-tsconfig@4.12.0", "", { "dependencies": { "resolve-pkg-maps": "^1.0.0" } }, "sha512-LScr2aNr2FbjAjZh2C6X6BxRx1/x+aTDExct/xyq2XKbYOiG5c0aK7pMsSuyc0brz3ibr/lbQiHD9jzt4lccJw=="],
 
     "hono": ["hono@4.10.3", "", {}, "sha512-2LOYWUbnhdxdL8MNbNg9XZig6k+cZXm5IjHn2Aviv7honhBMOHb+jxrKIeJRZJRmn+htUCKhaicxwXuUDlchRA=="],
+
+    "jiti": ["jiti@2.6.1", "", { "bin": { "jiti": "lib/jiti-cli.mjs" } }, "sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ=="],
 
     "jose": ["jose@5.10.0", "", {}, "sha512-s+3Al/p9g32Iq+oqXxkW//7jk2Vig6FF1CFqzVXoTUXt2qz89YWbL+OwS17NFYEvxC35n0FKeGO2LGYSxeM2Gg=="],
 
@@ -245,6 +254,8 @@
     "typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
 
     "undici-types": ["undici-types@6.21.0", "", {}, "sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ=="],
+
+    "zod": ["zod@4.1.12", "", {}, "sha512-JInaHOamG8pt5+Ey8kGmdcAcg3OL9reK8ltczgHTAwNhMys/6ThXHityHxVV2p3fkw/c+MAvBHFVYHFZDmjMCQ=="],
 
     "@esbuild-kit/core-utils/esbuild": ["esbuild@0.18.20", "", { "optionalDependencies": { "@esbuild/android-arm": "0.18.20", "@esbuild/android-arm64": "0.18.20", "@esbuild/android-x64": "0.18.20", "@esbuild/darwin-arm64": "0.18.20", "@esbuild/darwin-x64": "0.18.20", "@esbuild/freebsd-arm64": "0.18.20", "@esbuild/freebsd-x64": "0.18.20", "@esbuild/linux-arm": "0.18.20", "@esbuild/linux-arm64": "0.18.20", "@esbuild/linux-ia32": "0.18.20", "@esbuild/linux-loong64": "0.18.20", "@esbuild/linux-mips64el": "0.18.20", "@esbuild/linux-ppc64": "0.18.20", "@esbuild/linux-riscv64": "0.18.20", "@esbuild/linux-s390x": "0.18.20", "@esbuild/linux-x64": "0.18.20", "@esbuild/netbsd-x64": "0.18.20", "@esbuild/openbsd-x64": "0.18.20", "@esbuild/sunos-x64": "0.18.20", "@esbuild/win32-arm64": "0.18.20", "@esbuild/win32-ia32": "0.18.20", "@esbuild/win32-x64": "0.18.20" }, "bin": { "esbuild": "bin/esbuild" } }, "sha512-ceqxoedUrcayh7Y7ZX6NdbbDzGROiyVBgC4PriJThBKSVPWnnFHZAkfI1lJT8QFkOwH4qOS2SJkS4wvpGl8BpA=="],
 

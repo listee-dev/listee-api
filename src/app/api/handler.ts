@@ -8,10 +8,42 @@ import {
   createTaskRepository,
   createTaskService,
 } from "@listee/api";
-import { createHeaderAuthentication } from "@listee/auth";
+import { createSupabaseAuthentication } from "@listee/auth";
 import { getDb } from "@listee/db";
+import { getEnv } from "../env";
 
 const API_PREFIX = "/api";
+
+let cachedAuthentication: ReturnType<
+  typeof createSupabaseAuthentication
+> | null = null;
+
+const getAuthentication = (): ReturnType<
+  typeof createSupabaseAuthentication
+> => {
+  if (cachedAuthentication !== null) {
+    return cachedAuthentication;
+  }
+
+  const appEnv = getEnv();
+  const projectUrl = appEnv.SUPABASE_URL;
+  const audience = appEnv.SUPABASE_JWT_AUDIENCE;
+  const issuer = appEnv.SUPABASE_JWT_ISSUER;
+  const requiredRole = appEnv.SUPABASE_JWT_REQUIRED_ROLE;
+  const clockTolerance = appEnv.SUPABASE_JWT_CLOCK_TOLERANCE_SECONDS;
+  const jwksPath = appEnv.SUPABASE_JWKS_PATH;
+
+  cachedAuthentication = createSupabaseAuthentication({
+    projectUrl,
+    audience,
+    issuer,
+    requiredRole,
+    clockToleranceSeconds: clockTolerance,
+    jwksPath,
+  });
+
+  return cachedAuthentication;
+};
 
 const stripApiPrefix = (pathname: string): string => {
   if (!pathname.startsWith(API_PREFIX)) {
@@ -38,22 +70,40 @@ const taskService = createTaskService({
 });
 const categoryQueries = createCategoryQueries({ service: categoryService });
 const taskQueries = createTaskQueries({ service: taskService });
-const authentication = createHeaderAuthentication();
 
 const honoFetchHandler = createFetchHandler({
   databaseHealth,
   categoryQueries,
   taskQueries,
-  authentication,
+  authentication: {
+    authenticate: async (context) => {
+      const provider = getAuthentication();
+      return await provider.authenticate(context);
+    },
+  },
 });
 
 export const dispatchToListeeApi = async (
   request: Request,
 ): Promise<Response> => {
-  const originalUrl = new URL(request.url);
-  const targetUrl = new URL(request.url);
-  targetUrl.pathname = stripApiPrefix(originalUrl.pathname);
+  try {
+    const originalUrl = new URL(request.url);
+    const targetUrl = new URL(request.url);
+    targetUrl.pathname = stripApiPrefix(originalUrl.pathname);
 
-  const honoRequest = new Request(targetUrl, request);
-  return await honoFetchHandler(honoRequest);
+    const honoRequest = new Request(targetUrl, request);
+    return await honoFetchHandler(honoRequest);
+  } catch (error) {
+    const message =
+      error instanceof Error
+        ? error.message
+        : "An unexpected error occurred while handling the request.";
+    console.error("Unhandled Listee API error:", error);
+    return Response.json(
+      {
+        error: message,
+      },
+      { status: 500 },
+    );
+  }
 };
